@@ -1,0 +1,4 @@
+# Run API tests
+python -m unittest tests/test_api.py
+
+
