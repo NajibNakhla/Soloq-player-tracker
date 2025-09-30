@@ -38,17 +38,19 @@ def process_match_data(match_data: dict, target_puuid: str) -> dict:
 
             data["enemyChampion"] = enemy.get("championName") if enemy else "Unknown"
             data["enemyPuuid"] = enemy.get("puuid") if enemy else None
-            data["enemyIndividualPosition"] = enemy.get("individualPosition") if enemy else N
+            data["enemyIndividualPosition"] = enemy.get("individualPosition") if enemy else None
             
             # 1. Identity & Context
             keys = [
                 "championId", "championName", "individualPosition", "lane",
-                "teamPosition"
+                "teamPosition", "teamId"
             ]
             for k in keys:
                 data[k] = p.get(k)
 
             # 2. Outcome
+            data["side"] = "blue" if team_id == 100 else "red"
+            data["teamId"] = team_id
             data["win"] = p.get("win")
             data["gameEndedInSurrender"] = p.get("gameEndedInSurrender")
             data["gameEndedInEarlySurrender"] = p.get("gameEndedInEarlySurrender")
